@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from menu.views import CardView, CardsView, CardsApiView,
+from menu.views import CardView, CardsView, CardsApiView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
