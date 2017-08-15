@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from menu.views import CardView, CardsView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
+    url(r'^cards/$', CardsView.as_view(), name='cards'),
+    url(r'^card/(?P<pk>(\d)+)/$', CardView.as_view(), name='card'),
+
 ]
