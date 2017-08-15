@@ -6,7 +6,7 @@ from menu.models import Card, Meal
 
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
-    pass
+    list_display = [f.name for f in Card._meta.fields]
     # Description of List in Admin
     # list_display = \
     #     ['id', 'name', 'description', 'image_tag', 'main_category', 'level', 'lottery', 'date_created', 'date_updated']
@@ -23,7 +23,7 @@ class CardAdmin(admin.ModelAdmin):
 
 @admin.register(Meal)
 class MealAdmin(admin.ModelAdmin):
-    pass
+    list_display = [f.name for f in Meal._meta.fields]
     # Description of List in Admin
     # list_display = ['id', 'name', 'visible']
     # list_filter = ('visible',)
