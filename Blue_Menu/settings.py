@@ -84,7 +84,7 @@ DATABASES = {
     'default': {
         'HOST': '127.0.0.1',
         'NAME': 'menu_db',
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.db.backends.postgresql',
         'USER': 'damian',
         'PASSWORD': 'damian',
     }
