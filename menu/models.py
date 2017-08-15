@@ -4,7 +4,7 @@ from django.db import models
 from django.shortcuts import reverse
 
 
-class Menu(models.Model):
+class Card(models.Model):
     """
     This model represents Menu Card.
     """
@@ -12,12 +12,14 @@ class Menu(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=64, unique=True)
     description = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('menu', kwargs={'pk': self.id})
+        return reverse('card', kwargs={'pk': self.id})
 
 
 # class Meal(models.Model):
