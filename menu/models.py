@@ -33,7 +33,7 @@ class Meal(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     preparation_time = models.IntegerField()
     vegetarian = models.BooleanField()
-    # picture = models.ImageField(null=True)
+    picture = models.ImageField(upload_to='menu/static/menu/pictures', null=True)
     card = models.ManyToManyField(Card, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
@@ -44,8 +44,10 @@ class Meal(models.Model):
     def get_absolute_url(self):
         return reverse('meal', kwargs={'pk': self.id})
 
-    # def image_tag(self):
-    #     return u'<img src="%s" width="50" height="50" />' % self.logo
-    #
-    # image_tag.short_description = 'Image'
-    # image_tag.allow_tags = True
+    def image_tag(self):
+        directory = str(self.picture)
+        return '<img src="%s" width="50" height="50" />' % directory[4:]
+        # return '<img src="/static/menu/pictures/josegorn.jpg" width="50" height="50" />'
+
+    image_tag.short_description = 'Image'
+    image_tag.allow_tags = True

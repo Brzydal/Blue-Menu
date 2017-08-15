@@ -23,7 +23,12 @@ class CardAdmin(admin.ModelAdmin):
 
 @admin.register(Meal)
 class MealAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in Meal._meta.fields]
+    list = [f.name for f in Meal._meta.fields]
+    list.append('image_tag')
+    list_display = list
+    # fields = ('image_tag',)
+    readonly_fields = ('image_tag',)
+
     # Description of List in Admin
     # list_display = ['id', 'name', 'visible']
     # list_filter = ('visible',)

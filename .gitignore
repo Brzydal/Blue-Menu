@@ -1,4 +1,6 @@
 *sqlite3
+menu/static/menu/pictures
+
 
 *.pyc
 *.pyo
