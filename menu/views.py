@@ -1,10 +1,22 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
+from django.views.generic.edit import (
+    CreateView,
+    DeleteView, )
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+
 
 from .models import Card
+from .serializers import CardSerializer
 
 
 class CardsView(ListView):
@@ -20,3 +32,20 @@ class CardsView(ListView):
 class CardView(DetailView):
     template_name = 'menu/card.html'
     model = Card
+
+
+class CardsApiView(APIView):
+
+    @staticmethod
+    def get_all():
+        try:
+            return Card.objects.all()
+        except Card.DoesNotExist:
+            raise Http404
+
+    def get(self, request, format=None):
+        cards = self.get_all()
+        serializer = CardSerializer(cards, many=True, context={"request": request})
+        return Response(serializer.data)
+
+    # login_url = "/login/"
