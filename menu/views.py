@@ -14,10 +14,15 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Shop
+from .models import Card
 from .serializers import ShopSerializer
 
 
 class CardsView(ListView):
     template_name = 'menu/cards.html'
+    model = Card
+
+
+class CardView(DetailView):
+    template_name = 'menu/card.html'
     model = Card

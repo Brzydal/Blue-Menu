@@ -47,7 +47,6 @@ class Meal(models.Model):
     def image_tag(self):
         directory = str(self.picture)
         return '<img src="%s" width="50" height="50" />' % directory[4:]
-        # return '<img src="/static/menu/pictures/josegorn.jpg" width="50" height="50" />'
 
     image_tag.short_description = 'Image'
     image_tag.allow_tags = True
