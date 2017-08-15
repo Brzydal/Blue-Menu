@@ -7,4 +7,28 @@
 <h3>Date Created: {{card.date_created}}</h3>
 <h3>Date Updated: {{card.date_updated}}</h3>
 
+<h3>Meals:</h3>
+<table cellpadding="100">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Preparation time</th>
+        <th>Vegetarian</th>
+        <!--<th>Picture</th>-->
+    </tr>
+    {% for meal in card.meal_set.all %}
+    <tr>
+        <td>{{meal.name}}</td>
+        <td>{{meal.description}}</td>
+        <td>{{meal.price}} PLN</td>
+        <td>{{meal.preparation_time}} min</td>
+        <td>{{meal.vegetarian}}</td>
+        <!--<td> <img src="file:///home/damian/workspace/Blue-Menu/{{meal.picture}}" alt="meal" height="42" width="42"></td>-->
+    </tr>
+    {% empty %}
+    NO MEALS IN THIS CARD
+    {% endfor %}
+</table>
+
 {% endblock %}
