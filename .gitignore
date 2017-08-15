@@ -138,7 +138,7 @@ fabric.properties
 [Ss]cripts
 pyvenv.cfg
 .venv
-.env
+env
 pip-selfcheck.json
 
 # End of https://www.gitignore.io/api/virtualenv,eclipse,pycharm
