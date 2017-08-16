@@ -1,11 +1,8 @@
-from django.http import Http404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from rest_framework.response import Response
-from rest_framework.views import APIView
 
-from .models import Card, Meal
-from .serializers import CardSerializer, MealSerializer
+
+from .models import Card
 
 
 class CardsView(ListView):
@@ -23,31 +20,3 @@ class CardView(DetailView):
     model = Card
 
 
-class CardsApiView(APIView):
-
-    @staticmethod
-    def get_all():
-        try:
-            return Card.objects.all()
-        except Card.DoesNotExist:
-            raise Http404
-
-    def get(self, request, format=None):
-        cards = self.get_all()
-        serializer = CardSerializer(cards, many=True, context={"request": request})
-        return Response(serializer.data)
-
-
-class MealsApiView(APIView):
-
-    @staticmethod
-    def get_all():
-        try:
-            return Meal.objects.all()
-        except Meal.DoesNotExist:
-            raise Http404
-
-    def get(self, request, format=None):
-        meals = self.get_all()
-        serializer = MealSerializer(meals, many=True, context={"request": request})
-        return Response(serializer.data)
