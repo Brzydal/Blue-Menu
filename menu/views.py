@@ -9,7 +9,7 @@ class CardListView(ListView):
 
     def get_queryset(self):
         qs = super(CardListView, self).get_queryset()
-        return qs.filter(meal__isnull=False)
+        return qs.filter
 
 
 class CardDetailView(DetailView):
