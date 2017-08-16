@@ -1,3 +1,0 @@
-1. Czy pole: "Czas przygotowania" w modelu Card ma być jakiegoś specjalnego typu, czy wystarczy IntegerField?
-2. Czy dodać jakieś funkcjonalności w django.Adminie, np. uniemożliwić modyfikację daty dodania itp.?
-3. Czy jedno danie może być dostępne na kilku kartach?
