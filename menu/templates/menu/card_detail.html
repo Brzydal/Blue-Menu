@@ -24,7 +24,9 @@
         <td>{{meal.price}} PLN</td>
         <td>{{meal.preparation_time}} min</td>
         <td>{{meal.vegetarian}}</td>
-        <td> <img src="file:///home/damian/workspace/Blue-Menu/{{meal.picture}}" alt="meal" height="42" width="42"></td>
+        {% load static %}
+        <!--<img src="{% static "my_app/example.jpg" %}" alt="My image"/>-->
+        <td> <img src="{% static 'menu/pictures/{{meal.picture}}' %}" alt="meal" height="42" width="42"></td>
     </tr>
     {% empty %}
     NO MEALS IN THIS CARD
