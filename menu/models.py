@@ -11,7 +11,7 @@ class Meal(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    preparation_time = models.IntegerField()
+    preparation_time = models.DurationField()
     vegetarian = models.BooleanField()
     picture = models.ImageField(upload_to='menu/static/menu/pictures', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
