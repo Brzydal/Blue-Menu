@@ -11,5 +11,6 @@ class CardListApiView(ListAPIView):
 
     def list(self, request):
         queryset = self.get_queryset()
+
         serializer = CardSerializer(queryset, many=True)
         return Response(serializer.data)

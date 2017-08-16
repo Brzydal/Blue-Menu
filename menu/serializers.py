@@ -4,7 +4,11 @@ from .models import Card
 
 
 class CardSerializer(serializers.ModelSerializer):
+    meal_count = serializers.SerializerMethodField()
+
     class Meta:
         model = Card
-        fields = '__all__'
+        fields = ('id', 'name', 'description', 'created_at', 'updated_at', 'meal', 'meal_count')
 
+    def get_meal_count(self, obj):
+        return obj.meal.count()
