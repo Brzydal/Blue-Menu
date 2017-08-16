@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from menu.models import Card, Meal
 
 
@@ -11,8 +12,3 @@ class MealAdmin(admin.ModelAdmin):
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'description', 'created_at', 'updated_at']
-
-
-
-
-

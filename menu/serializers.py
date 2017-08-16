@@ -1,5 +1,6 @@
-from .models import Card, Meal
 from rest_framework import serializers
+
+from .models import Card, Meal
 
 
 class CardSerializer(serializers.ModelSerializer):
