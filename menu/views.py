@@ -8,8 +8,8 @@ class CardListView(ListView):
     model = Card
 
     def get_queryset(self):
-        queryset = Card.objects.filter(meal__isnull=False)
-        return queryset
+        qs = super(CardListView, self).get_queryset()
+        return qs.filter(meal__isnull=False)
 
 
 class CardDetailView(DetailView):
