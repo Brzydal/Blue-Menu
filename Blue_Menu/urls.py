@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from menu.views import CardDetailView, CardListView
-from menu.api.views import CardsApiView
+from menu.api.views import CardListApiView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^cards/$', CardListView.as_view(), name='cards'),
     url(r'^card/(?P<pk>(\d)+)/$', CardDetailView.as_view(), name='card'),
 
-    url(r'^cardsAPI/$', CardsApiView.as_view(), name='cards-api'),
+    url(r'^cardsAPI/$', CardListApiView.as_view(), name='cards-api'),
 
 
 ]

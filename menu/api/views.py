@@ -1,21 +1,15 @@
-from django.http import Http404
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 
 from menu.models import Card
 from menu.serializers import CardSerializer
 
 
-class CardsApiView(APIView):
+class CardListApiView(ListAPIView):
+    queryset = Card.objects.all()
+    serializer_class = CardSerializer
 
-    @staticmethod
-    def get_all():
-        try:
-            return Card.objects.all()
-        except Card.DoesNotExist:
-            raise Http404
-
-    def get(self, request, format=None):
-        cards = self.get_all()
-        serializer = CardSerializer(cards, many=True, context={"request": request})
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = CardSerializer(queryset, many=True)
         return Response(serializer.data)
