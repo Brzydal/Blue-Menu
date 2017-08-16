@@ -1,5 +1,5 @@
-from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
+from rest_framework.response import Response
 
 from menu.models import Card
 from menu.serializers import CardSerializer

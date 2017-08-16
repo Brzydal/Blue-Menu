@@ -1,9 +1,10 @@
-from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
+import coreapi
 from django.shortcuts import render
 from django.views import View
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
+
 from .models import Card
-import coreapi
 
 
 class CardListView(ListView):
@@ -25,5 +26,3 @@ class FinalView(View):
         schema = client.get('http://127.0.0.1:8000/cardsAPI/')
         ctx = {'result': schema}
         return render(request, 'menu/final.html', ctx)
-
-
