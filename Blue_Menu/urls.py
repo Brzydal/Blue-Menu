@@ -15,14 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from menu.views import CardDetailView, CardListView
+from menu.views import CardDetailView, CardListView, FinalView
 from menu.api.views import CardListApiView
+from rest_framework.documentation import include_docs_urls
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^docs/', include_docs_urls(title='My API service')),
 
     url(r'^cards/$', CardListView.as_view(), name='cards'),
     url(r'^card/(?P<pk>(\d)+)/$', CardDetailView.as_view(), name='card'),
+    url(r'^final/$', FinalView.as_view(), name='final'),
 
     url(r'^cardsAPI/$', CardListApiView.as_view(), name='cards-api'),
 
