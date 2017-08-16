@@ -13,10 +13,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-
-
-from .models import Card
-from .serializers import CardSerializer
+from .models import Card, Meal
+from .serializers import CardSerializer, MealSerializer
 
 
 class CardsView(ListView):
@@ -48,4 +46,19 @@ class CardsApiView(APIView):
         serializer = CardSerializer(cards, many=True, context={"request": request})
         return Response(serializer.data)
 
-    # login_url = "/login/"
+
+class MealsApiView(APIView):
+
+    @staticmethod
+    def get_all():
+        try:
+            return Meal.objects.all()
+        except Meal.DoesNotExist:
+            raise Http404
+
+    def get(self, request, format=None):
+        meals = self.get_all()
+        serializer = MealSerializer(meals, many=True, context={"request": request})
+        return Response(serializer.data)
+
+
