@@ -93,3 +93,33 @@ class CardIndexViewTests(TestCase):
         response = self.client.get(reverse('cards'))
         self.assertContains(response, "Menu Cards")
         self.assertQuerysetEqual(response.context['object_list'], ['<Card: Mieso>'])
+
+
+class CardDetailViewTests(TestCase):
+
+    def test_no_card(self):
+        """
+        If there is no card.
+        """
+        url = reverse('card', args=([1,]))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_empty_card(self):
+        """
+        If there is no meals on a card.
+        """
+        card = create_card(id=1, name='Empty', empty=True)
+        url = reverse('card', args=(card.id,))
+        response = self.client.get(url)
+        self.assertContains(response, 'NO MEALS IN THIS CARD')
+
+    def test_not_empty_card(self):
+        """
+        If there iae some meals on a card.
+        """
+        meal = create_meal(id=1)
+        card = create_card(id=1, name='Empty', empty=False)
+        url = reverse('card', args=(card.id,))
+        response = self.client.get(url)
+        self.assertContains(response, meal.name)
