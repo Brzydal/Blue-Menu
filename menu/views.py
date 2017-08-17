@@ -11,6 +11,9 @@ class CardListView(ListView):
     model = Card
 
     def get_queryset(self):
+        """
+        Returns all not empty Menu Cards
+        """
         qs = super(CardListView, self).get_queryset()
         return qs.exclude(meal__isnull=True)
 
@@ -22,6 +25,9 @@ class CardDetailView(DetailView):
 class FinalView(View):
 
     def get(self, request):
+        """
+        Rendering final.html template with API data as a context.
+        """
         client = coreapi.Client()
         schema = client.get('http://127.0.0.1:8000/cardsAPI/')
         ctx = {'result': schema}
