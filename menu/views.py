@@ -31,4 +31,4 @@ class FinalView(View):
         schema = client.get('http://127.0.0.1:8000/cardsAPI/')
         ctx = {'result': schema}
         return render(request, 'menu/final.html', ctx)
-        return render(request, 'menu/final.html')
+        # return render(request, 'menu/final.html')
