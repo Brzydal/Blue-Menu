@@ -29,6 +29,17 @@ class Meal(models.Model):
     image_tag.allow_tags = True
 
 
+class CardQuerySet(models.QuerySet):
+    """
+    This is QuerySet manager for Card model.
+    """
+    def with_meals(self):
+        """
+        Returns all not empty Menu Cards
+        """
+        return self.exclude(meals__isnull=True)
+
+
 class Card(models.Model):
     """
     This model represents Menu Card.
@@ -38,9 +49,14 @@ class Card(models.Model):
     meals = models.ManyToManyField(Meal, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = CardQuerySet.as_manager()
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('card', kwargs={'pk': self.id})
+
+
+
+

@@ -6,7 +6,7 @@ from menu.serializers import CardSerializer
 
 
 class CardListApiView(ListAPIView):
-    queryset = Card.objects.all().order_by('id').exclude(meals__isnull=True)
+    queryset = Card.objects.with_meals()
     serializer_class = CardSerializer
 
     def list(self, request):
