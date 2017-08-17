@@ -44,6 +44,10 @@ class Card(models.Model):
     """
     This model represents Menu Card.
     """
+
+    class Meta:
+        ordering = ["id"]
+
     name = models.CharField(max_length=64, unique=True)
     description = models.TextField()
     meals = models.ManyToManyField(Meal, blank=True)
