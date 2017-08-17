@@ -61,6 +61,9 @@ class Card(models.Model):
     def get_absolute_url(self):
         return reverse('card', kwargs={'pk': self.id})
 
+    def get_meals_count(self):
+        return self.meals.count()
+
 
 
 

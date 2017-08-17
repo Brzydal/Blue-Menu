@@ -9,6 +9,7 @@ from .models import Card
 
 class CardListView(ListView):
     model = Card
+    paginate_by = 5
 
     def get_queryset(self):
         """
