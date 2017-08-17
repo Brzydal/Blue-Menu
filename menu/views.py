@@ -22,7 +22,8 @@ class CardDetailView(DetailView):
     model = Card
 
 
-class FinalView(ListView):
+class FinalView(View):
+    paginate_by = 1
 
     def get(self, request):
         """
