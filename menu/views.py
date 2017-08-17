@@ -15,7 +15,7 @@ class CardListView(ListView):
         Returns all not empty Menu Cards
         """
         qs = super(CardListView, self).get_queryset()
-        return qs.exclude(meal__isnull=True)
+        return qs.exclude(meals__isnull=True)
 
 
 class CardDetailView(DetailView):

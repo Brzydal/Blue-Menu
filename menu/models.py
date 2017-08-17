@@ -35,7 +35,7 @@ class Card(models.Model):
     """
     name = models.CharField(max_length=64, unique=True)
     description = models.TextField()
-    meal = models.ManyToManyField(Meal, blank=True)
+    meals = models.ManyToManyField(Meal, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
