@@ -22,7 +22,7 @@ class CardDetailView(DetailView):
     model = Card
 
 
-class FinalView(View):
+class FinalView(ListView):
 
     def get(self, request):
         """
