@@ -168,10 +168,10 @@ class CardApiTests(APITestCase):
         """
         meal = create_meal(id=1)
         card1 = create_card(id=1, name='Mieso', empty=False)
-        card2 = create_card(id=2, name='pusta')
+        card2 = create_card(id=2, name='Empty')
         url = reverse('cards-api')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Card.objects.count(), 2)
         self.assertContains(response, card1.name)
-        self.assertNotContains(response, card2.name)
+        self.assertContains(response, card2.name)

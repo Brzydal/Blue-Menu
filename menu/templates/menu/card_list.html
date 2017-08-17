@@ -25,6 +25,8 @@
         <td>{{ card.created_at }}</td>
         <td>{{ card.updated_at }}</td>
       </tr>
+    {% empty %}
+    NO CARDS IN DATABASE
     {% endfor %}
   </tbody>
 </table>
