@@ -1,12 +1,13 @@
 from django.test import TestCase
 from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APITestCase
 
 from .models import Card, Meal
 import datetime
 
 
 class MealModelTests(TestCase):
-
     def test_image_tag(self):
         """
         Testing if image tag is properly created
@@ -85,7 +86,7 @@ class CardIndexViewTests(TestCase):
 
     def test_empty_card_and_not_empty_card(self):
         """
-        If only empty card exist.
+        If empty and not empty cards exist.
         """
         create_meal(id=1)
         create_card(id=1, name='Mieso')
@@ -116,10 +117,61 @@ class CardDetailViewTests(TestCase):
 
     def test_not_empty_card(self):
         """
-        If there iae some meals on a card.
+        If there are some meals on a card.
         """
         meal = create_meal(id=1)
-        card = create_card(id=1, name='Empty', empty=False)
+        card = create_card(id=1, name='Mieso', empty=False)
         url = reverse('card', args=(card.id,))
         response = self.client.get(url)
         self.assertContains(response, meal.name)
+
+
+class CardApiTests(APITestCase):
+
+    def test_no_card(self):
+        """
+        If there is no card.
+        """
+        url = reverse('cards-api')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Card.objects.count(), 0)
+
+    def test_empty_card(self):
+        """
+        If only empty card exist.
+        """
+        card = create_card(id=1, name='Empty', empty=True)
+        url = reverse('cards-api')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Card.objects.count(), 1)
+        self.assertEqual(Card.objects.get().name, card.name)
+        self.assertNotContains(response, card.name)
+
+    def test_not_empty_card(self):
+        """
+        If there is not empty card.
+        """
+        meal = create_meal(id=1)
+        card = create_card(id=1, name='Mieso', empty=False)
+        url = reverse('cards-api')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Card.objects.count(), 1)
+        self.assertEqual(Card.objects.get().name, card.name)
+        self.assertContains(response, card.name)
+
+    def test_empty_card_and_not_empty_card(self):
+        """
+        If empty and not empty cards exist.
+        """
+        meal = create_meal(id=1)
+        card1 = create_card(id=1, name='Mieso', empty=False)
+        card2 = create_card(id=2, name='pusta')
+        url = reverse('cards-api')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Card.objects.count(), 2)
+        self.assertContains(response, card1.name)
+        self.assertNotContains(response, card2.name)
