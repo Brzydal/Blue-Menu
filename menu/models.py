@@ -63,7 +63,3 @@ class Card(models.Model):
 
     def get_meals_count(self):
         return self.meals.count()
-
-
-
-
