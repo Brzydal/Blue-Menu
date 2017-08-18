@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import coreapi
 
 from django.shortcuts import render
@@ -21,6 +23,12 @@ class CardListView(ListView):
 
 class CardDetailView(DetailView):
     model = Card
+
+    def get_queryset(self):
+        """
+        Returns details of a card with given id.
+        """
+        return super(CardDetailView, self).get_queryset().prefetch_related('meals')
 
 
 class FinalView(View):
