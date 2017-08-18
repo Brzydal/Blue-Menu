@@ -22,7 +22,7 @@ class Meal(models.Model):
         return reverse('meal', kwargs={'pk': self.id})
 
     def image_tag(self):
-        directory = str(self.picture)
+        directory = self.picture.url
         return '<img src="%s" width="50" height="50" />' % directory[4:]
 
     image_tag.short_description = 'Image'
@@ -44,16 +44,15 @@ class Card(models.Model):
     """
     This model represents Menu Card.
     """
-
-    class Meta:
-        ordering = ["id"]
-
     name = models.CharField(max_length=64, unique=True)
     description = models.TextField()
     meals = models.ManyToManyField(Meal, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = CardQuerySet.as_manager()
+
+    class Meta:
+        ordering = ["id"]
 
     def __str__(self):
         return self.name
