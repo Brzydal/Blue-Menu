@@ -43,4 +43,9 @@ DATABASES = {
 ### 6. Start the app and Bon Apetit!
 - ```python manage.py runserver```
 
+## Features
+
+## Tests
+- ```python manage.py menu test```
+
 @created by brzydal
