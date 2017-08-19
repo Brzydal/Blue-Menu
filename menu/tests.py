@@ -16,7 +16,7 @@ class MealModelTests(TestCase):
         """
         Testing if image tag is properly created
         """
-        tag = Meal(picture='menu/static/menu/pictures/foto.jpg')
+        tag = Meal(picture='/static/menu/pictures/foto.jpg')
         self.assertEqual(tag.image_tag(), '<img src="/static/menu/pictures/foto.jpg" width="50" height="50" />')
 
 
