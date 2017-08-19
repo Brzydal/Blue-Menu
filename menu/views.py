@@ -53,8 +53,8 @@ class FinalView(View):
         client = coreapi.Client()
         schema = client.get(Constants.cards_api_url)
         #         ctx = {'result': schema}
-        contact_list = schema
-        paginator = Paginator(contact_list, 25) # Show 25 contacts per page
+        # contact_list = schema
+        paginator = Paginator(schema, 10) # Show 10 contacts per page
 
         page = request.GET.get('page')
         try:
