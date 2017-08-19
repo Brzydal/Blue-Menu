@@ -36,7 +36,7 @@ class FinalView(View):
     def get(self, request):
         client = coreapi.Client()
         schema = client.get(Constants.cards_api_url)
-        paginator = Paginator(schema, 10) # Show 10 contacts per page
+        paginator = Paginator(schema, Constants.page_size)
 
         page = request.GET.get('page')
         try:
@@ -48,4 +48,4 @@ class FinalView(View):
             # If page is out of range (e.g. 9999), deliver last page of results.
             cards = paginator.page(paginator.num_pages)
 
-        return render(request, 'menu/final.html', {'contacts': cards})
+        return render(request, 'menu/final.html', {'cards': cards})

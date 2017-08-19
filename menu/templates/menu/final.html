@@ -1,42 +1,6 @@
 {% extends 'menu/base.html' %}
 
 {% block content %}
-<!--<h3>Czysty rezultat z api</h3>-->
-<!--{{result}}-->
-<!--<h3>Menu Cards:</h3>-->
-
-
-<!--<table id="myTable" class="tablesorter, table">-->
-<!--<thead>-->
-<!--<tr>-->
-    <!--<th>Id</th>-->
-    <!--<th>Card Name</th>-->
-    <!--<td>Description</td>-->
-    <!--<th>Meals Quantity</th>-->
-    <!--<td>Date Created</td>-->
-    <!--<td>Date Updated</td>-->
-<!--</tr>-->
-<!--</thead>-->
-<!--<tbody>-->
-<!--{% for card in result %}-->
-<!--<tr>-->
-    <!--<td>{{card.id}}</td>-->
-    <!--<td><a href="{% url 'card' pk=card.id %}">{{card.name}}</a></td>-->
-    <!--<td>{{card.description}}</td>-->
-    <!--<td>{{card.meals_count}}</td>-->
-    <!--<td>{{card.created_at}}</td>-->
-    <!--<td>{{card.updated_at}}</td>-->
-<!--</tr>-->
-<!--{% empty %}-->
-<!--NO CARDS IN DATABASE-->
-<!--{% endfor %}-->
-
-<!--</tbody>-->
-<!--</table>-->
-
-
-
-
 
 <h1>MENU CARDS</h1>
 <table id="myTable" class="tablesorter, table">
@@ -51,14 +15,14 @@
 </tr>
 </thead>
 <tbody>
-{% for contact in contacts %}
+{% for card in cards %}
 <tr>
-    <td>{{contact.id}}</td>
-    <td><a href="{% url 'card' pk=contact.id %}">{{contact.name}}</a></td>
-    <td>{{contact.description}}</td>
-    <td>{{contact.meals_count}}</td>
-    <td>{{contact.created_at}}</td>
-    <td>{{contact.updated_at}}</td>
+    <td>{{card.id}}</td>
+    <td><a href="{% url 'card' pk=card.id %}">{{card.name}}</a></td>
+    <td>{{card.description}}</td>
+    <td>{{card.meals_count}}</td>
+    <td>{{card.created_at}}</td>
+    <td>{{card.updated_at}}</td>
 </tr>
 {% empty %}
 NO CARDS IN DATABASE
@@ -69,16 +33,16 @@ NO CARDS IN DATABASE
 
 <div class="pagination">
     <span class="step-links">
-        {% if contacts.has_previous %}
-            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% if cards.has_previous %}
+            <a href="?page={{ cards.previous_page_number }}">previous</a>
         {% endif %}
 
         <span class="current">
-            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+            Page {{ cards.number }} of {{ cards.paginator.num_pages }}.
         </span>
 
-        {% if contacts.has_next %}
-            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% if cards.has_next %}
+            <a href="?page={{ cards.next_page_number }}">next</a>
         {% endif %}
     </span>
 </div>
