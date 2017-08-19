@@ -31,15 +31,39 @@ class CardDetailView(DetailView):
         return super(CardDetailView, self).get_queryset().prefetch_related('meals')
 
 
-class FinalView(View):
-    paginate_by = 1
+# class FinalView(View):
+#     paginate_by = 1
+#
+#     def get(self, request):
+#         """
+#         Rendering final.html template with API data as a context.
+#         """
+#         client = coreapi.Client()
+#         schema = client.get(Constants.cards_api_url)
+#         ctx = {'result': schema}
+#         return render(request, 'menu/final.html', ctx)
+#         # return render(request, 'menu/final.html')
 
+
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+class FinalView(View):
     def get(self, request):
-        """
-        Rendering final.html template with API data as a context.
-        """
         client = coreapi.Client()
         schema = client.get(Constants.cards_api_url)
-        ctx = {'result': schema}
-        return render(request, 'menu/final.html', ctx)
-        # return render(request, 'menu/final.html')
+        #         ctx = {'result': schema}
+        contact_list = schema
+        paginator = Paginator(contact_list, 25) # Show 25 contacts per page
+
+        page = request.GET.get('page')
+        try:
+            contacts = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            contacts = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            contacts = paginator.page(paginator.num_pages)
+
+        return render(request, 'menu/final.html', {'contacts': contacts})
