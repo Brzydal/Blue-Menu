@@ -1,31 +1,64 @@
 {% extends 'menu/base.html' %}
 
 {% block content %}
-<h3>Czysty rezultat z api</h3>
-{{result}}
-<h3>Menu Cards:</h3>
+<!--<h3>Czysty rezultat z api</h3>-->
+<!--{{result}}-->
+<!--<h3>Menu Cards:</h3>-->
 
 
+<!--<table id="myTable" class="tablesorter, table">-->
+<!--<thead>-->
+<!--<tr>-->
+    <!--<th>Id</th>-->
+    <!--<th>Card Name</th>-->
+    <!--<td>Description</td>-->
+    <!--<th>Meals Quantity</th>-->
+    <!--<td>Date Created</td>-->
+    <!--<td>Date Updated</td>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--{% for card in result %}-->
+<!--<tr>-->
+    <!--<td>{{card.id}}</td>-->
+    <!--<td><a href="{% url 'card' pk=card.id %}">{{card.name}}</a></td>-->
+    <!--<td>{{card.description}}</td>-->
+    <!--<td>{{card.meals_count}}</td>-->
+    <!--<td>{{card.created_at}}</td>-->
+    <!--<td>{{card.updated_at}}</td>-->
+<!--</tr>-->
+<!--{% empty %}-->
+<!--NO CARDS IN DATABASE-->
+<!--{% endfor %}-->
+
+<!--</tbody>-->
+<!--</table>-->
+
+
+
+
+
+<h1>MENU CARDS</h1>
 <table id="myTable" class="tablesorter, table">
 <thead>
 <tr>
-    <th>Id</th>
-    <th>Card Name</th>
+    <th>Id<i class="fa fa-fw fa-sort"></i></th>
+    <th>Card Name<i class="fa fa-fw fa-sort"></i></th>
     <td>Description</td>
-    <th>Meals Quantity</th>
+    <th>Meals Quantity<i class="fa fa-fw fa-sort"></i></th>
     <td>Date Created</td>
     <td>Date Updated</td>
 </tr>
 </thead>
 <tbody>
-{% for card in result %}
+{% for contact in contacts %}
 <tr>
-    <td>{{card.id}}</td>
-    <td><a href="{% url 'card' pk=card.id %}">{{card.name}}</a></td>
-    <td>{{card.description}}</td>
-    <td>{{card.meals_count}}</td>
-    <td>{{card.created_at}}</td>
-    <td>{{card.updated_at}}</td>
+    <td>{{contact.id}}</td>
+    <td><a href="{% url 'card' pk=contact.id %}">{{contact.name}}</a></td>
+    <td>{{contact.description}}</td>
+    <td>{{contact.meals_count}}</td>
+    <td>{{contact.created_at}}</td>
+    <td>{{contact.updated_at}}</td>
 </tr>
 {% empty %}
 NO CARDS IN DATABASE
@@ -33,12 +66,6 @@ NO CARDS IN DATABASE
 
 </tbody>
 </table>
-<h1>TEST</h1>
-{% for contact in contacts %}
-    {# Each "contact" is a Contact model object. #}
-    {{ contact.name|upper }}<br />
-    ...
-{% endfor %}
 
 <div class="pagination">
     <span class="step-links">
