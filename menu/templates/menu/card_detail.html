@@ -8,27 +8,33 @@
 <h3>Date Updated: {{card.updated_at}}</h3>
 
 <h3>Meals:</h3>
-<table cellpadding="100">
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Preparation time</th>
-        <th>Vegetarian</th>
-        <th>Picture</th>
-    </tr>
-    {% for meal in card.meals.all %}
-    <tr>
-        <td>{{meal.name}}</td>
-        <td>{{meal.description}}</td>
-        <td>{{meal.price}} PLN</td>
-        <td>{{meal.preparation_time}} min</td>
-        <td>{{meal.vegetarian}}</td>
-        <td><img {{meal.image_tag|cut:'img'}} /></td>
-    </tr>
-    {% empty %}
-    NO MEALS IN THIS CARD
-    {% endfor %}
+<table id="myTable" class="tablesorter, table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Preparation time</th>
+            <th>Vegetarian</th>
+            <th>Picture</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for meal in card.meals.all %}
+        <tr>
+            <td>{{meal.id}}</td>
+            <td>{{meal.name}}</td>
+            <td>{{meal.description}}</td>
+            <td>{{meal.price}} PLN</td>
+            <td>{{meal.preparation_time}} min</td>
+            <td>{{meal.vegetarian}}</td>
+            <td><img src="{{meal.picture}}"/></td>
+        </tr>
+        {% empty %}
+        NO MEALS IN THIS CARD
+        {% endfor %}
+    </tbody>
 </table>
 
 {% endblock %}

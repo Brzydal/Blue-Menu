@@ -25,8 +25,8 @@ class Meal(models.Model):
         return reverse('meal', kwargs={'pk': self.id})
 
     def image_tag(self):
-        directory = self.picture.url
-        return '<img src="%s" width="50" height="50" />' % directory[4:]
+        directory = self.picture
+        return '<img src="%s" width="50" height="50" />' % directory
 
     image_tag.short_description = 'Image'
     image_tag.allow_tags = True
