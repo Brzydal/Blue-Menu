@@ -20,14 +20,14 @@ class MealModelTests(TestCase):
         Testing if image tag is properly created for images from hard drive
         """
         tag = Meal(picture='/static/menu/pictures/foto.jpg')
-        self.assertEqual(tag.image_tag(), '<img src="/media/static/menu/pictures/foto.jpg" width="50" height="50" />')
+        self.assertEqual(tag.image_tag(), '<img src="/media/static/menu/pictures/foto.jpg" width="50" height="50"/>')
 
     def test_image_tag_http(self):
         """
         Testing if image tag is properly created for images from hard drive
         """
         tag = Meal(picture='http://static/menu/pictures/foto.jpg')
-        self.assertEqual(tag.image_tag(), '<img src="http://static/menu/pictures/foto.jpg" width="50" height="50" />')
+        self.assertEqual(tag.image_tag(), '<img src="http://static/menu/pictures/foto.jpg" width="50" height="50"/>')
 
 
 def create_meal(id):
@@ -89,7 +89,7 @@ class CardListViewTests(TestCase):
         create_meal(id=1)
         create_card(id=1, name='Mieso')
         response = self.client.get(reverse('cards'))
-        self.assertContains(response, "Menu Cards")
+        self.assertContains(response, "MENU CARDS")
         self.assertQuerysetEqual(response.context['object_list'], ['<Card: Mieso>'])
 
     def test_empty_card(self):
@@ -109,7 +109,7 @@ class CardListViewTests(TestCase):
         create_card(id=1, name='Mieso')
         create_card(id=2, name='Empty', empty=True)
         response = self.client.get(reverse('cards'))
-        self.assertContains(response, "Menu Cards")
+        self.assertContains(response, "MENU CARDS")
         self.assertQuerysetEqual(response.context['object_list'], ['<Card: Mieso>'])
 
 
@@ -143,6 +143,44 @@ class CardDetailViewTests(TestCase):
         url = reverse('card', args=(card.id,))
         response = self.client.get(url)
         self.assertContains(response, meal.name)
+
+
+class CardFinalTests(TestCase):
+    """
+    Tests for FinalView.
+    """
+    def test_no_cards(self):
+        """
+        If no cards exist, an appropriate message is displayed.
+        """
+        response = self.client.get(reverse('final'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_not_empty_card(self):
+        """
+        If only not empty card exist.
+        """
+        create_meal(id=1)
+        create_card(id=1, name='Mieso')
+        response = self.client.get(reverse('final'))
+        self.assertContains(response, "MENU CARDS")
+
+    def test_empty_card(self):
+        """
+        If only empty card exist.
+        """
+        create_card(id=1, name='Empty', empty=True)
+        response = self.client.get(reverse('final'))
+
+    def test_empty_card_and_not_empty_card(self):
+        """
+        If empty and not empty cards exist.
+        """
+        create_meal(id=1)
+        create_card(id=1, name='Mieso')
+        create_card(id=2, name='Empty', empty=True)
+        response = self.client.get(reverse('final'))
+        self.assertContains(response, "MENU CARDS")
 
 
 class CardListAPITests(APITestCase):

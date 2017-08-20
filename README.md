@@ -45,16 +45,16 @@ https://github.com/Brzydal/Blue-Menu/blob/master/requirements.txt
 ### 6. Start the app and Bon Apetit!
 - ```python manage.py runserver```
 
-
 ## Features
 
 ## Tests
+If you want to run tests, You can simply use:
+
 - ```python manage.py test menu```
 
-or
-
+or If You want to generate report about test coverage:
 - ```coverage run --source='.' manage.py test menu```
-- ```coverage report```
+- ```coverage report --include="./menu/*"```
 
 
 @created by brzydal
