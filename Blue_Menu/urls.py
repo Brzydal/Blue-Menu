@@ -13,17 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+import debug_toolbar
+from django.conf import settings
+from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import RedirectView
-from menu.views import CardDetailView, CardListView, FinalView
-from menu.api.views import CardListApiView, CardRetrieveApiView
 from rest_framework.documentation import include_docs_urls
 
-from django.conf import settings
-from django.conf.urls.static import static
-
-import debug_toolbar
+from menu.api.views import CardListApiView, CardRetrieveApiView
+from menu.views import CardDetailView, CardListView, FinalView
 
 urlpatterns = [
 
@@ -42,4 +41,3 @@ urlpatterns = [
     url(r'^__debug__/', include(debug_toolbar.urls)),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

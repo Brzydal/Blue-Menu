@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='card',
-            name='meal',
+            name='meals',
             field=models.ManyToManyField(blank=True, to='menu.Meal'),
         ),
     ]
