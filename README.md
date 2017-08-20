@@ -47,12 +47,30 @@ https://github.com/Brzydal/Blue-Menu/blob/master/requirements.txt
 
 ## Features
 
+### 1. Models
+Two models created:
+- Meal - represents a single meal
+- Card - represents menu card
+### 2. Views
+Five views created:
+- CardListView - renders template for list of menu cards
+- CardDetailView - renders template for single menu card
+- CardListAPIView - renders API for list of menu cards
+- CardRetrieveAPIView - renders API for single menu card
+- FinalView - renders template for list of menu cards. This view bases on CardListAPIView. The data was consumed from API, paginated and displayed in a table
+
+### 3. Sorting
+Sorting by id, name or number of meals was achieved thanks to JS tablesorter implemented.
+
+_some more documentation can be found here:_
+http://127.0.0.1:8000/admin/doc/
+
 ## Tests
-If you want to run tests, You can simply use:
+Tests can be run by:
 
 - ```python manage.py test menu```
 
-or If You want to generate report about test coverage:
+or if coverage report shall be generated, this commands should be used:
 - ```coverage run --source='.' manage.py test menu```
 - ```coverage report --include="./menu/*"```
 
