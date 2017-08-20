@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from menu.views import CardDetailView, CardListView, FinalView
-from menu.api.views import CardListApiView
+from menu.api.views import CardListApiView, CardRetrieveApiView
 from rest_framework.documentation import include_docs_urls
 
 from django.conf import settings
@@ -32,7 +32,7 @@ urlpatterns = [
     url(r'^card/(?P<pk>(\d)+)/$', CardDetailView.as_view(), name='card'),
     url(r'^final/$', FinalView.as_view(), name='final'),
 
-    url(r'^cardsAPI/$', CardListApiView.as_view(), name='cards-api'),
-
+    url(r'^cardsAPI/$', CardListApiView.as_view(), name='cards-api-list'),
+    url(r'^cardsAPI/(?P<pk>(\d)+)/$', CardRetrieveApiView.as_view(), name='cards-api-retrieve'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
