@@ -2,18 +2,18 @@
 from __future__ import unicode_literals
 
 import coreapi
+from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import DetailView, ListView
 
-from .constants import Constants
 from .models import Card
 
 
 class CardListView(ListView):
     model = Card
-    paginate_by = Constants.page_size
+    paginate_by = settings.PAGE_SIZE
 
     def get_queryset(self):
         """
@@ -35,8 +35,8 @@ class CardDetailView(DetailView):
 class FinalView(View):
     def get(self, request):
         client = coreapi.Client()
-        schema = client.get(Constants.cards_api_url)
-        paginator = Paginator(schema, Constants.page_size)
+        schema = client.get(settings.CARDS_API_URL)
+        paginator = Paginator(schema, settings.PAGE_SIZE)
 
         page = request.GET.get('page')
         try:
