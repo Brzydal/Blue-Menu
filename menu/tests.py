@@ -137,7 +137,7 @@ class CardDetailViewTests(TestCase):
         self.assertContains(response, meal.name)
 
 
-class CardApiTests(APITestCase):
+class CardApiListTests(APITestCase):
 
     def test_no_card(self):
         """
@@ -186,3 +186,52 @@ class CardApiTests(APITestCase):
         self.assertEqual(Card.objects.count(), 2)
         self.assertContains(response, card1.name)
         self.assertContains(response, card2.name)
+        
+
+class CardApiRetrieveTests(APITestCase):
+
+    def test_no_card(self):
+        """
+        If there is no card.
+        """
+        url = reverse('cards-api-retrieve', kwargs={'pk': 1})
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(Card.objects.count(), 0)
+
+    def test_empty_card(self):
+        """
+        If only empty card exist.
+        """
+        card = create_card(id=1, name='Empty', empty=True)
+        url = reverse('cards-api-retrieve', kwargs={'pk': card.id})
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(Card.objects.count(), 1)
+        self.assertEqual(Card.objects.get().name, card.name)
+
+    def test_not_empty_card(self):
+        """
+        If there is not empty card.
+        """
+        meal = create_meal(id=1)
+        card = create_card(id=1, name='Mieso', empty=False)
+        url = reverse('cards-api-retrieve', kwargs={'pk': card.id})
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Card.objects.count(), 1)
+        self.assertEqual(Card.objects.get().name, card.name)
+        self.assertContains(response, card.name)
+
+    def test_empty_card_and_not_empty_card(self):
+        """
+        If empty and not empty cards exist.
+        """
+        meal = create_meal(id=1)
+        card1 = create_card(id=1, name='Mieso', empty=False)
+        card2 = create_card(id=2, name='Empty')
+        url = reverse('cards-api-retrieve', kwargs={'pk': card1.id})
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Card.objects.count(), 2)
+        self.assertContains(response, card1.name)

@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 
 if settings.DEBUG:
     import debug_toolbar
+
 urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', admin.site.urls),
@@ -36,6 +37,6 @@ urlpatterns = [
     url(r'^cardsAPI/$', CardListApiView.as_view(), name='cards-api-list'),
     url(r'^cardsAPI/(?P<pk>(\d)+)/$', CardRetrieveApiView.as_view(), name='cards-api-retrieve'),
 
-    url(r'^__debug__/', include(debug_toolbar.urls)),
+    # url(r'^__debug__/', include(debug_toolbar.urls)),
 
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
