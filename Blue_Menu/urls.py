@@ -19,6 +19,9 @@ from menu.views import CardDetailView, CardListView, FinalView
 from menu.api.views import CardListApiView
 from rest_framework.documentation import include_docs_urls
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -32,4 +35,4 @@ urlpatterns = [
     url(r'^cardsAPI/$', CardListApiView.as_view(), name='cards-api'),
 
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

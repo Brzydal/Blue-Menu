@@ -30,7 +30,7 @@
             <td>{{meal.price}} PLN</td>
             <td>{{meal.preparation_time}} min</td>
             <td>{{meal.vegetarian}}</td>
-            <td><img src="{{meal.picture}}"/></td>
+            <td>{{meal.image_tag|safe}}</td>
         </tr>
         {% empty %}
         NO MEALS IN THIS CARD

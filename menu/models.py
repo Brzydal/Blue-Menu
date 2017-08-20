@@ -14,7 +14,7 @@ class Meal(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     preparation_time = models.DurationField()
     vegetarian = models.BooleanField()
-    picture = models.ImageField(upload_to='menu/static/menu/pictures', null=True)
+    picture = models.ImageField(upload_to='media/menu/pictures', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -25,7 +25,10 @@ class Meal(models.Model):
         return reverse('meal', kwargs={'pk': self.id})
 
     def image_tag(self):
-        directory = self.picture
+        if str(self.picture)[0:5] == 'https':
+            directory = self.picture
+        else:
+            directory = self.picture.url
         return '<img src="%s" width="50" height="50" />' % directory
 
     image_tag.short_description = 'Image'
