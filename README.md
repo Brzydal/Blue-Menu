@@ -49,8 +49,12 @@ https://github.com/Brzydal/Blue-Menu/blob/master/requirements.txt
 ## Features
 
 ## Tests
-- ```python manage.py menu test```
+- ```python manage.py test menu```
 
-create superuser
+or
+
+- ```coverage run --source='.' manage.py test menu```
+- ```coverage report```
+
 
 @created by brzydal

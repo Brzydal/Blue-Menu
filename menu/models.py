@@ -25,7 +25,7 @@ class Meal(models.Model):
         return reverse('meal', kwargs={'pk': self.id})
 
     def image_tag(self):
-        if str(self.picture)[0:5] == 'https':
+        if str(self.picture)[0:4] == 'http':
             directory = self.picture
         else:
             directory = self.picture.url

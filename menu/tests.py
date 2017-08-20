@@ -12,12 +12,19 @@ from .models import Card, Meal
 
 
 class MealModelTests(TestCase):
-    def test_image_tag(self):
+    def test_image_tag_hd(self):
         """
-        Testing if image tag is properly created
+        Testing if image tag is properly created for images from hard drive
         """
         tag = Meal(picture='/static/menu/pictures/foto.jpg')
-        self.assertEqual(tag.image_tag(), '<img src="/static/menu/pictures/foto.jpg" width="50" height="50" />')
+        self.assertEqual(tag.image_tag(), '<img src="/media/static/menu/pictures/foto.jpg" width="50" height="50" />')
+
+    def test_image_tag_http(self):
+        """
+        Testing if image tag is properly created for images from hard drive
+        """
+        tag = Meal(picture='http://static/menu/pictures/foto.jpg')
+        self.assertEqual(tag.image_tag(), '<img src="http://static/menu/pictures/foto.jpg" width="50" height="50" />')
 
 
 def create_meal(id):
@@ -29,7 +36,7 @@ def create_meal(id):
     price = 10.00
     preparation_time = '00:05:00'
     vegetarian = True
-    picture = None
+    picture = 'http://static/menu/pictures/foto.jpg'
     created_at = datetime.datetime.now()
     updated_at = datetime.datetime.now()
     return Meal.objects.create(id=id,
@@ -136,7 +143,7 @@ class CardApiTests(APITestCase):
         """
         If there is no card.
         """
-        url = reverse('cards-api')
+        url = reverse('cards-api-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Card.objects.count(), 0)
@@ -146,7 +153,7 @@ class CardApiTests(APITestCase):
         If only empty card exist.
         """
         card = create_card(id=1, name='Empty', empty=True)
-        url = reverse('cards-api')
+        url = reverse('cards-api-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Card.objects.count(), 1)
@@ -159,7 +166,7 @@ class CardApiTests(APITestCase):
         """
         meal = create_meal(id=1)
         card = create_card(id=1, name='Mieso', empty=False)
-        url = reverse('cards-api')
+        url = reverse('cards-api-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Card.objects.count(), 1)
@@ -173,7 +180,7 @@ class CardApiTests(APITestCase):
         meal = create_meal(id=1)
         card1 = create_card(id=1, name='Mieso', empty=False)
         card2 = create_card(id=2, name='Empty')
-        url = reverse('cards-api')
+        url = reverse('cards-api-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Card.objects.count(), 2)
