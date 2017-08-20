@@ -25,23 +25,26 @@ All other requirements as per requirements.txt:
 https://github.com/Brzydal/Blue-Menu/blob/master/requirements.txt
 - ```pip install -r requirements.txt```
 
-### 5. Insert data to database
-Go to Blue Menu/db_data and run ```psql dbname < menu_db_dump``` or run all SQL queries in Blue Menu/db_data.
-
-### 6. Check db configuration in settings.py
-```Python
-DATABASES = {
-    'default': {
-        'HOST': '127.0.0.1',
-        'NAME': 'menu_db',
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'damian',
-        'PASSWORD': 'damian',
+### 5. Database configuration:
+- create superuser damian: ```sudo -u postgres createuser --superuser damian```
+- with password damian: ```sudo -u postgres psql``` and ```postgres=# \password damian```
+- create database menu_db: ```sudo -u postgres createdb -0 damian menu_db```
+- fill up database with data: Go to Blue Menu/db_data and run ```psql menu_db < menu_db_dump``` or run all SQL queries in Blue Menu/db_data.
+- check db configuration in settings.py
+    ```Python
+    DATABASES = {
+        'default': {
+            'HOST': '127.0.0.1',
+            'NAME': 'menu_db',
+            'ENGINE': 'django.db.backends.postgresql',
+            'USER': 'damian',
+            'PASSWORD': 'damian',
+        }
     }
-}
-```
+    ```
 ### 6. Start the app and Bon Apetit!
 - ```python manage.py runserver```
+
 
 ## Features
 
