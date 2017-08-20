@@ -10,5 +10,5 @@ class CardListApiView(ListAPIView):
 
 
 class CardRetrieveApiView(RetrieveAPIView):
-    queryset = Card.objects.non_empty_cards()
+    queryset = Card.objects.non_empty_cards().prefetch_related('meals')
     serializer_class = CardSerializer
