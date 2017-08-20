@@ -2,14 +2,15 @@
 
 {% block content %}
 
-<h2>Name: {{card.name}}</h2>
-<h3>Description: {{card.description}}</h3>
+<h2>Name: {{card.name|upper}}</h2>
+<h3>Description: {{card.description|title}}</h3>
 <h3>Date Created: {{card.created_at}}</h3>
 <h3>Date Updated: {{card.updated_at}}</h3>
 
 <h3>Meals:</h3>
 <table id="myTable" class="tablesorter table">
     <thead>
+        {% if card.meals.all %}
         <tr>
             <th>Id<i class="fa fa-fw fa-sort"></i></th>
             <th>Name<i class="fa fa-fw fa-sort"></i></th>
@@ -19,6 +20,7 @@
             <th>Vegetarian<i class="fa fa-fw fa-sort"></i></th>
             <td><b>Picture</b></td>
         </tr>
+        {% endif %}
     </thead>
 
     <tbody>
@@ -33,7 +35,7 @@
             <td>{{meal.image_tag|safe}}</td>
         </tr>
         {% empty %}
-        NO MEALS IN THIS CARD
+        <h3>NO MEALS IN THIS CARD</h3>
         {% endfor %}
     </tbody>
 </table>

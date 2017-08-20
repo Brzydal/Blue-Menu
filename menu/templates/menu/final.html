@@ -18,7 +18,7 @@
 {% for card in cards %}
 <tr>
     <td>{{card.id}}</td>
-    <td><a href="{% url 'card' pk=card.id %}">{{card.name}}</a></td>
+    <td><a href="{% url 'card' pk=card.id %}">{{card.name|title}}</a></td>
     <td>{{card.description}}</td>
     <td>{{card.meals_count}}</td>
     <td>{{card.created_at|localize}}</td>

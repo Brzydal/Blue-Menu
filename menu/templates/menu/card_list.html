@@ -19,7 +19,7 @@
     {% for card in object_list %}
       <tr>
         <td>{{ card.id }}</td>
-        <td><a href="{% url 'card' pk=card.id %}">{{card}}</a></td>
+        <td><a href="{% url 'card' pk=card.id %}">{{card|title}}</a></td>
         <td>{{ card.description }}</td>
         <td>{{ card.get_meals_count }}</td>
         <td>{{ card.created_at }}</td>
