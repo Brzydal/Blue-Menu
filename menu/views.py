@@ -19,7 +19,7 @@ class CardListView(ListView):
         """
         Returns all not empty Menu Cards
         """
-        return super(CardListView, self).get_queryset().non_empty_cards()
+        return super(CardListView, self).get_queryset().non_empty_cards().prefetch_related('meals')
 
 
 class CardDetailView(DetailView):
@@ -29,7 +29,7 @@ class CardDetailView(DetailView):
         """
         Returns details of a card with given id.
         """
-        return super(CardDetailView, self).get_queryset().prefetch_related('meals')
+        return super(CardDetailView, self).get_queryset()
 
 
 class FinalView(View):
