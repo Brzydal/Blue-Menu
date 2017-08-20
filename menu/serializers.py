@@ -7,6 +7,9 @@ from .models import Card
 
 
 class CardSerializer(serializers.ModelSerializer):
+    """
+    Serializing data for Card model.
+    """
     meals_count = serializers.SerializerMethodField()
 
     class Meta:

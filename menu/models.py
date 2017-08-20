@@ -25,6 +25,10 @@ class Meal(models.Model):
         return reverse('meal', kwargs={'pk': self.id})
 
     def image_tag(self):
+        """
+        Creating image tag for Card.picture field.
+        Useful to display pictures in Django admin.
+        """
         if str(self.picture)[0:4] == 'http':
             directory = self.picture
         else:
@@ -67,4 +71,7 @@ class Card(models.Model):
         return reverse('card', kwargs={'pk': self.id})
 
     def get_meals_count(self):
+        """
+        Returns all number of meals assigned to this Card
+        """
         return self.meals.count()

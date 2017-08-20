@@ -12,6 +12,9 @@ from .models import Card, Meal
 
 
 class MealModelTests(TestCase):
+    """
+    Tests for Meal model.
+    """
     def test_image_tag_hd(self):
         """
         Testing if image tag is properly created for images from hard drive
@@ -66,7 +69,10 @@ def create_card(id, name, empty=False):
                                updated_at=updated_at)
 
 
-class CardIndexViewTests(TestCase):
+class CardListViewTests(TestCase):
+    """
+    Tests for CardListView.
+    """
     def test_no_cards(self):
         """
         If no cards exist, an appropriate message is displayed.
@@ -108,7 +114,9 @@ class CardIndexViewTests(TestCase):
 
 
 class CardDetailViewTests(TestCase):
-
+    """
+    Tests for CardDetailsView.
+    """
     def test_no_card(self):
         """
         If there is no card.
@@ -137,8 +145,10 @@ class CardDetailViewTests(TestCase):
         self.assertContains(response, meal.name)
 
 
-class CardApiListTests(APITestCase):
-
+class CardListAPITests(APITestCase):
+    """
+    Tests for CardListAPIView.
+    """
     def test_no_card(self):
         """
         If there is no card.
@@ -188,8 +198,10 @@ class CardApiListTests(APITestCase):
         self.assertContains(response, card2.name)
         
 
-class CardApiRetrieveTests(APITestCase):
-
+class CardRetrieveAPITests(APITestCase):
+    """
+    Tests for CardRetrieveAPIView.
+    """
     def test_no_card(self):
         """
         If there is no card.

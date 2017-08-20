@@ -12,6 +12,9 @@ from .models import Card
 
 
 class CardListView(ListView):
+    """
+    List View for Card model
+    """
     model = Card
     paginate_by = settings.PAGE_SIZE
 
@@ -23,6 +26,9 @@ class CardListView(ListView):
 
 
 class CardDetailView(DetailView):
+    """
+    Detail View for Card model
+    """
     model = Card
 
     def get_queryset(self):
@@ -33,6 +39,10 @@ class CardDetailView(DetailView):
 
 
 class FinalView(View):
+    """
+    This View is created on basis of CardListAPIView.
+    First API is consumed by coreapi.Client, then paginated and rendered in final.html template.
+    """
     def get(self, request):
         client = coreapi.Client()
         schema = client.get(settings.CARDS_API_URL)

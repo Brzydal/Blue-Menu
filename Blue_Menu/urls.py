@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^docs/', include_docs_urls(title='My API service')),
-    url(r'^$', RedirectView.as_view(pattern_name='cards', permanent=False)),
+    url(r'^$', RedirectView.as_view(pattern_name='final', permanent=False)),
 
     url(r'^cards/$', CardListView.as_view(), name='cards'),
     url(r'^card/(?P<pk>(\d)+)/$', CardDetailView.as_view(), name='card'),

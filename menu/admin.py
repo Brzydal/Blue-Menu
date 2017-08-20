@@ -8,6 +8,9 @@ from menu.models import Card, Meal
 
 @admin.register(Meal)
 class MealAdmin(admin.ModelAdmin):
+    """
+    Model Meal registered in Django Admin
+    """
     readonly_fields = ['image_tag',
                        ]
     list_display = ['id',
@@ -24,6 +27,9 @@ class MealAdmin(admin.ModelAdmin):
 
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
+    """
+    Model Card registered in Django Admin
+    """
     list_display = ['id',
                     'name',
                     'description',
