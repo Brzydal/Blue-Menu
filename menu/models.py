@@ -33,7 +33,7 @@ class Meal(models.Model):
             directory = self.picture
         else:
             directory = self.picture.url
-        return '<img src="%s" width="50" height="50" />' % directory
+        return '<img src="%s" width="50" height="50"/>' % directory
 
     image_tag.short_description = 'Image'
     image_tag.allow_tags = True
