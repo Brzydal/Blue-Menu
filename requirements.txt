@@ -4,8 +4,11 @@ click==6.7
 coreapi==2.3.1
 coreapi-cli==1.0.6
 coreschema==0.0.4
+coverage==4.4.1
 Django==1.11.4
+django-debug-toolbar==1.8
 djangorestframework==3.6.3
+docutils==0.14
 idna==2.6
 isort==4.2.15
 itypes==1.1.0
@@ -13,9 +16,9 @@ Jinja2==2.9.6
 MarkupSafe==1.0
 olefile==0.44
 Pillow==4.2.1
-pkg-resources==0.0.0
 psycopg2==2.7.3
 pytz==2017.2
 requests==2.18.4
+sqlparse==0.2.3
 uritemplate==3.0.0
 urllib3==1.22
