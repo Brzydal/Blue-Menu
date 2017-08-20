@@ -48,4 +48,6 @@ DATABASES = {
 ## Tests
 - ```python manage.py menu test```
 
+create superuser
+
 @created by brzydal

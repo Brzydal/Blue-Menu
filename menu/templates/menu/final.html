@@ -1,7 +1,7 @@
 {% extends 'menu/base.html' %}
 
 {% block content %}
-
+{% load l10n %}
 <h1>MENU CARDS</h1>
 <table id="myTable" class="tablesorter, table">
 <thead>
@@ -21,7 +21,7 @@
     <td><a href="{% url 'card' pk=card.id %}">{{card.name}}</a></td>
     <td>{{card.description}}</td>
     <td>{{card.meals_count}}</td>
-    <td>{{card.created_at}}</td>
+    <td>{{card.created_at|localize}}</td>
     <td>{{card.updated_at}}</td>
 </tr>
 {% empty %}
