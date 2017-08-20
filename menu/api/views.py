@@ -5,6 +5,6 @@ from menu.serializers import CardSerializer
 
 
 class CardListApiView(ListAPIView):
-    queryset = Card.objects.with_meals()
+    queryset = Card.objects.non_empty_cards()
     serializer_class = CardSerializer
 

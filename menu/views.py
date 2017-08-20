@@ -19,7 +19,7 @@ class CardListView(ListView):
         """
         Returns all not empty Menu Cards
         """
-        return super(CardListView, self).get_queryset().with_meals()
+        return super(CardListView, self).get_queryset().non_empty_cards()
 
 
 class CardDetailView(DetailView):

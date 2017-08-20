@@ -36,7 +36,7 @@ class CardQuerySet(models.QuerySet):
     """
     This is QuerySet manager for Card model.
     """
-    def with_meals(self):
+    def non_empty_cards(self):
         """
         Returns all not empty Menu Cards
         """
