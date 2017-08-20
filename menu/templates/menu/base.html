@@ -19,6 +19,20 @@
 
 </head>
 <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <div style="display:inline"><a class="navbar-brand" href="{% url 'final' %}">Home</a></div>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'cards' %}">Cards</a></li>
+            <li><a href="{% url 'cards-api-list' %}">CardsAPI</a></li>
+            <li><a href="{% url 'final' %}">Final</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 {% block content %}
 {% endblock %}
 </body>
