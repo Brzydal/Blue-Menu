@@ -1,7 +1,8 @@
 *sqlite3
 menu/static/menu/pictures
 
-
+.coverage
+*.docx
 *.pyc
 *.pyo
 __pycache__
